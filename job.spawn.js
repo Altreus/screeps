@@ -19,4 +19,6 @@ module.exports = function(spawn, role, name) {
             memory: memory
         }
     );
+
+    return c;
 };

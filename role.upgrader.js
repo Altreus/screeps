@@ -6,7 +6,7 @@ var Upgrader = function(creep) {
 }
 
 Upgrader.spawnAt = function(spawn, name) {
-    doSpawn(spawn, 'upgrader', name);
+    return doSpawn(spawn, 'upgrader', name);
 }
 
 Upgrader.tick = function(creep) {

@@ -14,7 +14,10 @@ module.exports.loop = function() {
             let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == type);
             if (creeps.length < count) {
                 console.log("Spawning " + type);
-                var newCreep = roles[type].spawnAt(spawn)
+                var e = roles[type].spawnAt(spawn)
+                if (e == ERR_NOT_ENOUGH_ENERGY) {
+                    break;
+                }
             }
         }
     }

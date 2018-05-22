@@ -7,7 +7,7 @@ var Builder = function(creep) {
 }
 
 Builder.spawnAt = function(spawn, name) {
-    doSpawn(spawn, 'builder', name);
+    return doSpawn(spawn, 'builder', name);
 }
 
 Builder.tick = function(creep) {

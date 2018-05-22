@@ -7,7 +7,7 @@ var Harvester = function(creep) {
 }
 
 Harvester.spawnAt = function(spawn, name) {
-    doSpawn(spawn, 'harvester', name);
+    return doSpawn(spawn, 'harvester', name);
 }
 
 Harvester.tick = function(creep) {
