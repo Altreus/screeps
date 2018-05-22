@@ -20,6 +20,11 @@ Builder.tick = function(creep) {
     // have a job, be a Harvester
 
     if (creep.memory.mode == 'work') {
+        if (Game.spawns.BestSpawnYet.energy < 300) {
+            Harvester.tick(creep);
+            return;
+        }
+
         let targets = creep.room.find(FIND_CONSTRUCTION_SITES);
         if(targets.length) {
             var e = creep.build(targets[0]);
