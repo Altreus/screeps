@@ -14,13 +14,14 @@ Upgrader.tick = function(creep) {
         let idleZone = creep.memory.idleZone;
         creep.moveTo(idleZone[0], idleZone[1]);
     }
-    else if(creep.carry.energy < creep.carryCapacity) {
-        let source = creep.memory.preferredSource;
-        harvest(creep, source, {visualizePathStyle: {stroke: '#ffaa00'}})
-    }
     else {
-        if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+        var e = creep.upgradeController(creep.room.controller);
+        if (e == ERR_NOT_IN_RANGE) {
             creep.moveTo(creep.room.controller);
+        }
+        else if(e == ERR_NOT_ENOUGH_RESOURCES) {
+            let source = creep.memory.preferredSource;
+            harvest(creep, source, {visualizePathStyle: {stroke: '#ffaa00'}})
         }
     }
 };
