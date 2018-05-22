@@ -7,7 +7,7 @@ module.exports.loop = function() {
     for (let n in config.spawnPriority) {
         if (spawn.spawning) break;
         let type = config.spawnPriority[n];
-        let count = config.targetCounts[type];
+        let count = config.targetCounts[type](spawn);
 
         if (roles[type]) {
             // FIXME: can we keep track of this?
