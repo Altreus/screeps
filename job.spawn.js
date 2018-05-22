@@ -12,6 +12,7 @@ module.exports = function(spawn, role, name) {
     }
 
     memory.role = role;
+    memory.mode = "work";
 
     var c = spawn.spawnCreep([CARRY, WORK, MOVE], name,
         {

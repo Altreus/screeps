@@ -1,5 +1,10 @@
-module.exports = function(creep, target, opts) {
+// Puts a creep in harvest mode until it is full. Then puts it in work mode.
+// opts can contain moveOpts, which is passed to creep.moveTo
+
+module.exports = function(creep, opts) {
+    creep.memory.mode = "harvest";
     opts = opts || {};
+    let target = creep.memory.preferredSource;
     if (target instanceof Array) {
         target = creep.room.lookForAt(LOOK_SOURCES, target[0], target[1])[0];
     }
@@ -17,5 +22,11 @@ module.exports = function(creep, target, opts) {
     }
     else if (e) {
         console.log("Harvest error: " + e);
+    }
+    else {
+        if (creep.carry.energy == creep.carryCapacity) {
+            creep.say("So full");
+            creep.memory.mode = "work";
+        }
     }
 };
