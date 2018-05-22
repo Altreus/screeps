@@ -1,3 +1,5 @@
+var harvest = require('job.harvest');
+
 var Upgrader = function(creep) {
     this.creep = creep;
 }
@@ -24,24 +26,7 @@ Upgrader.tick = function(creep) {
     }
     else if(creep.carry.energy < creep.carryCapacity) {
         let source = creep.memory.preferredSource;
-
-        if (source) {
-            source = creep.room.lookForAt(LOOK_SOURCES,source[0], source[1])[0];
-        }
-
-        if (! source) {
-            let sources = creep.room.find(FIND_SOURCES);
-            source = sources[0];
-            source = creep.room.lookForAt(LOOK_SOURCES, source.pos)[0];
-        }
-
-        let e = creep.harvest(source);
-        if(e == ERR_NOT_IN_RANGE) {
-            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
-        }
-        else if (e) {
-            console.log("Harvest error: " + e);
-        }
+        harvest(creep, source, {visualizePathStyle: {stroke: '#ffaa00'}})
     }
     else {
         if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
