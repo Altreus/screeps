@@ -11,21 +11,20 @@ Harvester.spawnAt = function(spawn, name) {
             memory: { role: "harvester" }
         }
     );
-    if (c != 0) {
-        console.log("Harvester spawn error: " + c)
-    }
+//    if (c != 0) {
+//        console.log("Harvester spawn error: " + c)
+//    }
     return new Harvester(c);
 }
 
 Harvester.tick = function(creep) {
     if(creep.carry.energy < creep.carryCapacity) {
-        console.log("Gather");
         let source = undefined; //creep.memory.preferredSource;
 
         if (source) {
             source = creep.room.lookForAt(LOOK_SOURCES,source[0], source[1])
         }
-        
+
         if (! source) {
             let sources = creep.room.find(FIND_SOURCES);
             source = sources[0];
@@ -35,7 +34,6 @@ Harvester.tick = function(creep) {
         }
     }
     else {
-        console.log("Charge");
         var targets = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&

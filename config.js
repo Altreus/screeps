@@ -8,6 +8,7 @@
  */
 
 module.exports = {
+    spawnPriority: [ 'harvester', 'upgrader', 'builder' ],
     targetCounts: {
         harvester: 1,
         upgrader: 2,
