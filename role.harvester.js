@@ -1,3 +1,5 @@
+var Upgrader = require('role.upgrader');
+
 var Harvester = function(creep) {
     this.creep = creep;
 }
@@ -46,10 +48,7 @@ Harvester.tick = function(creep) {
             }
         }
         else {
-            let idleZone = creep.memory.idleZone;
-            if( idleZone ) {
-                creep.moveTo(idleZone[0], idleZone[1]);
-            }
+            Upgrader.tick(creep);
         }
     }
 };

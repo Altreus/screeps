@@ -1,3 +1,5 @@
+var Harvester = require('role.harvester');
+
 var Builder = function(creep) {
     this.creep = creep;
 }
@@ -11,9 +13,9 @@ Builder.spawnAt = function(spawn, name) {
             memory: { role: "builder" }
         }
     );
-    if (c != 0) {
-        console.log("Builder spawn error: " + c)
-    }
+//    if (c != 0) {
+//        console.log("Builder spawn error: " + c)
+//    }
     return new Builder(c);
 }
 
@@ -36,6 +38,9 @@ Builder.tick = function(creep) {
             if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
             }
+        }
+        else {
+            Harvester.tick(creep);
         }
     }
     else {

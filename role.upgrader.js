@@ -11,9 +11,9 @@ Upgrader.spawnAt = function(spawn, name) {
             memory: { role: "upgrader" }
         }
     );
-    if (c != 0) {
-        console.log("Upgrader spawn error: " + c)
-    }
+//    if (c != 0) {
+//        console.log("Upgrader spawn error: " + c)
+//    }
     return new Upgrader(c);
 }
 
