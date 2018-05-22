@@ -23,9 +23,24 @@ Upgrader.tick = function(creep) {
         creep.moveTo(idleZone[0], idleZone[1]);
     }
     else if(creep.carry.energy < creep.carryCapacity) {
-        var sources = creep.room.find(FIND_SOURCES);
-        if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(sources[0]);
+        let source = creep.memory.preferredSource;
+
+        if (source) {
+            source = creep.room.lookForAt(LOOK_SOURCES,source[0], source[1])[0];
+        }
+
+        if (! source) {
+            let sources = creep.room.find(FIND_SOURCES);
+            source = sources[0];
+            source = creep.room.lookForAt(LOOK_SOURCES, source.pos)[0];
+        }
+
+        let e = creep.harvest(source);
+        if(e == ERR_NOT_IN_RANGE) {
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+        }
+        else if (e) {
+            console.log("Harvest error: " + e);
         }
     }
     else {

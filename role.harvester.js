@@ -21,7 +21,7 @@ Harvester.spawnAt = function(spawn, name) {
 
 Harvester.tick = function(creep) {
     if(creep.carry.energy < creep.carryCapacity) {
-        let source = undefined; //creep.memory.preferredSource;
+        let source = creep.memory.preferredSource;
 
         if (source) {
             source = creep.room.lookForAt(LOOK_SOURCES,source[0], source[1])
