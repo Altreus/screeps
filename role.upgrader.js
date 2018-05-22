@@ -22,7 +22,7 @@ Upgrader.tick = function(creep) {
         let idleZone = creep.memory.idleZone;
         creep.moveTo(idleZone[0], idleZone[1]);
     }
-    else if(creep.carry.energy == 0) {
+    else if(creep.carry.energy < creep.carryCapacity) {
         var sources = creep.room.find(FIND_SOURCES);
         if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
             creep.moveTo(sources[0]);
