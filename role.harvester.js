@@ -1,22 +1,12 @@
 var Upgrader = require('role.upgrader');
+var doSpawn = require('job.spawn');
 
 var Harvester = function(creep) {
     this.creep = creep;
 }
 
 Harvester.spawnAt = function(spawn, name) {
-    if (name === undefined) {
-        name = "Harvester" + Game.time;
-    }
-    var c = spawn.spawnCreep([CARRY, WORK, MOVE], name,
-        {
-            memory: { role: "harvester" }
-        }
-    );
-//    if (c != 0) {
-//        console.log("Harvester spawn error: " + c)
-//    }
-    return new Harvester(c);
+    doSpawn(spawn, 'harvester', name);
 }
 
 Harvester.tick = function(creep) {

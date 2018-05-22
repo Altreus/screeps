@@ -1,22 +1,12 @@
 var Harvester = require('role.harvester');
+var doSpawn = require('job.spawn');
 
 var Builder = function(creep) {
     this.creep = creep;
 }
 
 Builder.spawnAt = function(spawn, name) {
-    if (name === undefined) {
-        name = "Builder" + Game.time;
-    }
-    var c = spawn.spawnCreep([CARRY, WORK, MOVE], name,
-        {
-            memory: { role: "builder" }
-        }
-    );
-//    if (c != 0) {
-//        console.log("Builder spawn error: " + c)
-//    }
-    return new Builder(c);
+    doSpawn(spawn, 'builder', name);
 }
 
 Builder.tick = function(creep) {
