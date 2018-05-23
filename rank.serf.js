@@ -1,6 +1,5 @@
-/* Serf role
- * [ CARRY, WORK, MOVE ]
- * Can be repurposed for whatever currently needs doing.
+/* Serf rank is [ CARRY, WORK, MOVE ]
+ * Basic unit that can be repurposed
  */
 
 // FIXME: is new too expensive?
