@@ -1,4 +1,7 @@
-module.exports = function(spawn, role, name) {
+module.exports = function(proto, spawn, name) {
+    var role = proto.role;
+    var parts = proto.parts;
+
     if (name === undefined) {
         name = role.charAt(0).toUpperCase() + role.substring(1) + Game.time;
     }
@@ -12,9 +15,9 @@ module.exports = function(spawn, role, name) {
     }
 
     memory.role = role;
-    memory.mode = "work";
+    memory.mode = "harvest";
 
-    var c = spawn.spawnCreep([CARRY, WORK, MOVE], name,
+    var c = spawn.spawnCreep(parts, name,
         {
             memory: memory
         }
