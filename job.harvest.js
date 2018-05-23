@@ -1,8 +1,13 @@
-// Puts a creep in harvest mode until it is full. Then puts it in work mode.
-// opts can contain moveOpts, which is passed to creep.moveTo
+/* Puts a creep in harvest mode until it is full. Then puts it in work mode.
+ * opts:
+ * { moveOpts: passed to creep.moveTo }
+ *
+ * Returns:
+ * 0: Normal tick
+ * 1: Mode changed
+ */
 
 module.exports = function(creep, opts) {
-    creep.memory.mode = "harvest";
     opts = opts || {};
     let target = creep.memory.preferredSource;
     if (target instanceof Array) {
