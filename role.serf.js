@@ -6,8 +6,8 @@
 // FIXME: is new too expensive?
 var doSpawn = require('job.spawn');
 var doHarvest = require('job.harvest');
-//var doUpgrade = require('job.upgrade');
-//var doCharge = require('job.charge');
+var doUpgrade = require('job.upgrade');
+var doCharge = require('job.charge');
 //var doBuild = require('job.build');
 
 /* new Serf(creep)
@@ -41,6 +41,7 @@ Serf.spawn = function(spawn, role, name) {
         parts: [CARRY, WORK, MOVE],
         role: role
     }, spawn, name);
+    return c;
 };
 
 /* serf.tick()
@@ -85,16 +86,24 @@ Serf.prototype.tick = function () {
  * the new job if the mode is changed.
  */
 Serf.prototype.work = function () {
+    var ret = 0;
     switch (this.role) {
         case "charger":
-            doCharge(this.creep);
+            ret = doCharge(this.creep);
             break;
         case "upgrader":
-            doUpgrade(this.creep);
+            ret = doUpgrade(this.creep);
             break;
         case "builder":
-            doBuild(this.creep);
+            ret = doBuild(this.creep);
     }
+
+    if (ret == 1) {
+        // mode changed! Tick again to do the new job
+        ret = this.tick();
+    }
+
+    return ret;
 }
 
 /* serf.harvest()

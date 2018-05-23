@@ -32,6 +32,9 @@ module.exports = function(creep, opts) {
         if (creep.carry.energy == creep.carryCapacity) {
             creep.say("So full");
             creep.memory.mode = "work";
+            return 1;
         }
     }
+
+    return 0;
 };
