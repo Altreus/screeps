@@ -100,6 +100,17 @@ Serf.prototype.work = function () {
 
     if (ret == 1) {
         // mode changed! Tick again to do the new job
+        this.mode = this.creep.memory.mode;
+
+        switch(this.mode) {
+            case "harvest":
+                this.creep.say("So hungry :(");
+                break;
+            case "work":
+                this.creep.say("Back to work :(");
+                break;
+        }
+
         ret = this.tick();
     }
 
