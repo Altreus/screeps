@@ -1,9 +1,18 @@
 var config = require('config');
 var roles = require('roles');
 
+function cleanupDeadCreeps() {
+    for(var name in Memory.creeps) {
+        if(!Game.creeps[name]) {
+            console.log('Clearing non-existing creep memory:', name);
+            delete Memory.creeps[name];
+        }
+    }
+}
 // TODO: deal with multiple spawns
 var spawn = Game.spawns.BestSpawnYet;
 module.exports.loop = function() {
+    cleanupDeadCreeps();
     for (let n in config.spawnPriority) {
         if (spawn.spawning) break;
         let type = config.spawnPriority[n];
