@@ -1,5 +1,5 @@
 var config = require('config');
-var roles = require('roles');
+var ranks = require('ranks');
 
 function cleanupDeadCreeps() {
     for(var name in Memory.creeps) {
@@ -23,7 +23,7 @@ module.exports.loop = function() {
             let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == type);
             if (creeps.length < count) {
                 console.log("Spawning " + type);
-                var e = roles[type].spawnAt(spawn)
+                let e = ranks.serf.spawn(spawn, type);
                 if (e == ERR_NOT_ENOUGH_ENERGY) {
                     break;
                 }
@@ -33,10 +33,7 @@ module.exports.loop = function() {
 
     for (let n in Game.creeps) {
         let c = Game.creeps[n];
-        if (!c) continue;
-        let r = roles[c.memory.role];
-        if (r) {
-            r.tick(c);
-        }
+
+        new ranks.serf(c).tick();
     }
 };
