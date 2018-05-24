@@ -23,5 +23,10 @@ module.exports = function(proto, spawn, name) {
         }
     );
 
-    return c;
+    if (c == OK) {
+        return Game.creeps[name];
+    }
+    else {
+        return c;
+    }
 };
