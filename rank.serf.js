@@ -3,11 +3,11 @@
  */
 
 // FIXME: is new too expensive?
-var doSpawn = require('job.spawn');
-var doHarvest = require('job.harvest');
-var doUpgrade = require('job.upgrade');
-var doCharge = require('job.charge');
-//var doBuild = require('job.build');
+var doSpawn = require('task.spawn');
+var doHarvest = require('task.harvest');
+var doUpgrade = require('task.upgrade');
+var doCharge = require('task.charge');
+var doBuild = require('task.build');
 
 /* new Serf(creep)
  *
@@ -33,7 +33,7 @@ var Serf = function (creep) {
  * Returns the error value of spawnCreep on the spawn object.
  * (Should this return the new creep?)
  *
- * see job.spawn
+ * see task.spawn
  */
 Serf.spawn = function(spawn, role, name) {
     var c = doSpawn({
@@ -48,14 +48,14 @@ Serf.spawn = function(spawn, role, name) {
  * Depending on the serf's mode, either do that thing, or complain that it
  * can't.
  *
- * Returns the corresponding value from its job (defined by its role).
+ * Returns the corresponding value from its task (defined by its role).
  *
  * Normally:
  * 0: Normal tick
  * 1: Mode changed e.g. (work -> harvest)
  * 2: Nothing to do
  *
- * Some jobs may return other values.
+ * Some tasks may return other values.
  */
 Serf.prototype.tick = function () {
     var f = this[this.mode];
@@ -70,11 +70,11 @@ Serf.prototype.tick = function () {
 
 /* serf.work()
  *
- * Depending on the serf's role, do the relevant job.
+ * Depending on the serf's role, do the relevant task.
  *
  * Runs from tick() when the creep is in work mode.
  *
- * If the job causes a change in mode, redo tick().
+ * If the task causes a change in mode, redo tick().
  *
  * Returns:
  * 0: Normal tick
@@ -82,7 +82,7 @@ Serf.prototype.tick = function () {
  * 2: Nothing to do
  *
  * Note that 1 will never be returned, because it will return the response from
- * the new job if the mode is changed.
+ * the new task if the mode is changed.
  */
 Serf.prototype.work = function () {
     var ret = 0;
@@ -98,7 +98,7 @@ Serf.prototype.work = function () {
     }
 
     if (ret == 1) {
-        // mode changed! Tick again to do the new job
+        // mode changed! Tick again to do the new task
         this.mode = this.creep.memory.mode;
 
         switch(this.mode) {
@@ -118,7 +118,7 @@ Serf.prototype.work = function () {
 
 /* serf.harvest()
  *
- * Finds a suitable energy source and harvests from it. See job.harvest.
+ * Finds a suitable energy source and harvests from it. See task.harvest.
  *
  * Returns:
  * 0: Normal tick
