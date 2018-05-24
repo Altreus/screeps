@@ -1,4 +1,4 @@
-/* Serf rank is [ CARRY, WORK, MOVE ]
+/* Serf job is [ CARRY, WORK, MOVE ]
  * Basic unit that can be repurposed
  */
 
