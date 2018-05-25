@@ -32,17 +32,25 @@ Serf.prototype.mode = function() { return this.creep.memory.mode || 'harvest' }
  * role: a role for this creep, currently charger, upgrader, builder
  * name: an optional name for the creep; generated if not supplied.
  *
- * Returns the error value of spawnCreep on the spawn object.
- * (Should this return the new creep?)
+ * Returns a new Serf if successful, or else returns the error value of
+ * spawnCreep on the spawn object.
  *
  * see task.spawn
  */
 Serf.spawn = function(spawn, role, name) {
     var c = doSpawn({
         parts: [CARRY, WORK, MOVE],
-        role: role
+        role: role,
+        memory: {
+            job: "serf"
+        }
     }, spawn, name);
-    return c;
+    if (c instanceof Creep) {
+        return new Serf(c);
+    }
+    else {
+        return c;
+    }
 };
 
 /* serf.tick()
