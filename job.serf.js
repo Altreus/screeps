@@ -120,6 +120,18 @@ Serf.prototype.work = function () {
 
         ret = this.tick();
     }
+    if (ret == 2) {
+        // Nothing to do! Build instead, or upgrade if not that
+        ret = doBuild(this.creep);
+
+        if (ret == 2) {
+            ret = doUpgrade(this.creep);
+        }
+
+        if (ret == 2) {
+            // figure out how to idle
+        }
+    }
 
     return ret;
 }
