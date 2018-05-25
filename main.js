@@ -48,7 +48,7 @@ module.exports.loop = function() {
                 spawn.memory.serfs[c.creep.name] = c.creep.memory.role;
             }
             if (c == ERR_NOT_ENOUGH_ENERGY) {
-                console.log("Never mind");
+                console.log("Trying again at " + (spawn.energy + 50));
                 spawn.memory.tryAgainAt = spawn.energy + 50;
             }
 
