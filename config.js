@@ -8,9 +8,9 @@ function howManyBuilders(spawn) {
 }
 
 module.exports = {
-    spawnPriority: [ 'harvester', 'upgrader', 'builder' ],
+    spawnPriority: [ 'charger', 'upgrader', 'builder' ],
     targetCounts: {
-        harvester: function() { return 1 },
+        charger: function() { return 1 },
         upgrader: function() { return 2 },
         builder: howManyBuilders
     }
