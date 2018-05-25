@@ -63,6 +63,6 @@ module.exports.loop = function() {
             continue;
         }
 
-        new jobs.serf(c).tick();
+        new jobs[c.memory.job](c).tick();
     }
 };
