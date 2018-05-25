@@ -44,8 +44,8 @@ module.exports.loop = function() {
 
             // FIXME is this right?
             if (c instanceof jobs.serf) {
-                console.log("New creep: " + c.creep.id + " is a " + c.creep.memory.role);
-                spawn.memory.serfs[c.creep.id] = c.creep.memory.role;
+                console.log("New creep: " + c.creep.name + " is a " + c.creep.memory.role);
+                spawn.memory.serfs[c.creep.name] = c.creep.memory.role;
             }
             if (c == ERR_NOT_ENOUGH_ENERGY) {
                 console.log("Never mind");
