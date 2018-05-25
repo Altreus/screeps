@@ -1,5 +1,5 @@
 var config = require('config');
-var ranks = require('ranks');
+var jobs = require('jobs');
 
 function cleanupDeadCreeps() {
     for(var name in Memory.creeps) {

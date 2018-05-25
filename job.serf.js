@@ -16,11 +16,13 @@ var doBuild = require('task.build');
  */
 var Serf = function (creep) {
     this.creep = creep;
-    this.role = creep.memory.role;
-    this.mode = creep.memory.mode;
 }
 
-/* error = Serf.spawn(spawn, role, name)
+/* TODO base class */
+Serf.prototype.role = function() { return this.creep.memory.role }
+Serf.prototype.mode = function() { return this.creep.memory.mode || 'harvest' }
+
+/* serf = Serf.spawn(spawn, role, name)
  *
  * Spawns a new creep of the serf type, [CARRY,WORK,MOVE].
  *
@@ -58,13 +60,13 @@ Serf.spawn = function(spawn, role, name) {
  * Some tasks may return other values.
  */
 Serf.prototype.tick = function () {
-    var f = this[this.mode];
+    var f = this[this.mode()];
 
     if (f) {
         f.apply(this, arguments);
     }
     else {
-        console.log("No function handle mode " + mode);
+        console.log("No function to handle mode " + this.mode());
     }
 }
 
@@ -86,7 +88,7 @@ Serf.prototype.tick = function () {
  */
 Serf.prototype.work = function () {
     var ret = 0;
-    switch (this.role) {
+    switch (this.role()) {
         case "charger":
             ret = doCharge(this.creep);
             break;
@@ -99,9 +101,7 @@ Serf.prototype.work = function () {
 
     if (ret == 1) {
         // mode changed! Tick again to do the new task
-        this.mode = this.creep.memory.mode;
-
-        switch(this.mode) {
+        switch(this.mode()) {
             case "harvest":
                 this.creep.say("So hungry :(");
                 break;
@@ -127,3 +127,5 @@ Serf.prototype.work = function () {
 Serf.prototype.harvest = function () {
     doHarvest(this.creep);
 }
+
+module.exports = Serf;
