@@ -18,10 +18,11 @@ module.exports.loop = function() {
     cleanupDeadCreeps();
 
     // Only spawning serfs for now
-    for (let n in config.spawnPriority) {
+    for (let type of config.spawnPriority) {
         if (!! spawn.spawning) {
             break;
         }
+
         if (spawn.memory.tryAgainAt
             && spawn.memory.tryAgainAt > spawn.energy) {
             break;
@@ -30,7 +31,6 @@ module.exports.loop = function() {
         if (spawn.memory.tryAgainAt) {
             delete spawn.memory['tryAgainAt'];
         }
-        let type = config.spawnPriority[n];
         let count = config.targetCounts[type](spawn);
 
         console.log("Need " + count + " of " + type);
