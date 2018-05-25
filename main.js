@@ -23,7 +23,7 @@ module.exports.loop = function() {
             break;
         }
         if (spawn.memory.tryAgainAt
-            && spawn.memory.tryAgainAt < spawn.energy) {
+            && spawn.memory.tryAgainAt > spawn.energy) {
             break;
         }
 
