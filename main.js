@@ -19,10 +19,20 @@ module.exports.loop = function() {
 
     // Only spawning serfs for now
     for (let n in config.spawnPriority) {
-        if (!! spawn.spawning) break;
+        if (!! spawn.spawning) {
+            break;
+        }
+        if (spawn.memory.tryAgainAt
+            && spawn.memory.tryAgainAt < spawn.energy) {
+            break;
+        }
+
+        if (spawn.memory.tryAgainAt) {
+            delete spawn.memory['tryAgainAt'];
+        }
         let type = config.spawnPriority[n];
         let count = config.targetCounts[type](spawn);
-        
+
         console.log("Need " + count + " of " + type);
 
         // FIXME: can we keep track of this?
@@ -33,12 +43,11 @@ module.exports.loop = function() {
             let c = jobs.serf.spawn(spawn, type);
             if (c instanceof Creep) {
                 console.log("New creep: " + c.id + " is a " + c.memory.role);
-
-                // this doesn't work
                 spawn.memory.serfs[c.id] = c.memory.role;
             }
             if (c == ERR_NOT_ENOUGH_ENERGY) {
                 console.log("Never mind");
+                spawn.memory.tryAgainAt = spawn.energy + 50;
                 break;
             }
         }
