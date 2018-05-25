@@ -41,7 +41,9 @@ module.exports.loop = function() {
         if (creeps.length < count) {
             console.log("Spawning " + type);
             let c = jobs.serf.spawn(spawn, type);
-            if (c instanceof Creep) {
+
+            // FIXME is this right?
+            if (c instanceof Function) {
                 console.log("New creep: " + c.id + " is a " + c.memory.role);
                 spawn.memory.serfs[c.id] = c.memory.role;
             }
