@@ -13,6 +13,9 @@ module.exports = function(creep, opts) {
     if (target instanceof Array) {
         target = creep.room.lookForAt(LOOK_SOURCES, target[0], target[1])[0];
     }
+    else if (target) {
+        target = Game.getObjectById(target);
+    }
 
     if (! target) {
         let sources = creep.room.find(FIND_SOURCES);
