@@ -15,6 +15,9 @@ module.exports = function(creep) {
         creep.memory.mode = "harvest";
         return 1;
     }
+    else {
+        console.log(creep.name + " upgrade error " + e);
+    }
 
     return 0;
 }
