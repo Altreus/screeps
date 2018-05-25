@@ -50,8 +50,10 @@ module.exports.loop = function() {
             if (c == ERR_NOT_ENOUGH_ENERGY) {
                 console.log("Never mind");
                 spawn.memory.tryAgainAt = spawn.energy + 50;
-                break;
             }
+
+            // Always break. If we call spawnCreep again, it overrides!
+            break;
         }
     }
 
