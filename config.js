@@ -1,4 +1,5 @@
 function howManyBuilders(spawn) {
+    return 0;
     var constructions = spawn.room.find(FIND_CONSTRUCTION_SITES);
 
     var sum = (acc, c) => acc + parseInt(c.progressTotal, "10");
@@ -12,7 +13,7 @@ function howManyBuilders(spawn) {
 module.exports = {
     spawnPriority: [ 'charger', 'upgrader', 'builder' ],
     targetCounts: {
-        charger: function() { return 1 },
+        charger: function() { return 2 },
         upgrader: function() { return 2 },
         builder: howManyBuilders
     }

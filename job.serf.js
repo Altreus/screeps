@@ -45,6 +45,7 @@ Serf.spawn = function(spawn, role, name) {
             job: "serf"
         }
     }, spawn, name);
+
     if (c instanceof Creep) {
         return new Serf(c);
     }
