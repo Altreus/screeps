@@ -14,14 +14,12 @@ module.exports = function(proto, spawn, name) {
     memory.role = role;
     memory.mode = "harvest";
 
-    var c = spawn.spawnCreep(parts, name,
-        {
-            memory: memory
-        }
-    );
+    var c = spawn.spawnCreep(parts, name);
 
     if (c == OK) {
-        return Game.creeps[name];
+        let creep = Game.creeps[name];
+        creep.memory = memory;
+        return creep;
     }
     else {
         return c;
