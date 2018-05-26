@@ -3,11 +3,12 @@
  */
 
 // FIXME: is new too expensive?
-var doSpawn = require('task.spawn');
-var doHarvest = require('task.harvest');
-var doUpgrade = require('task.upgrade');
-var doCharge = require('task.charge');
-var doBuild = require('task.build');
+var doSpawn = require('task.spawn'),
+    doHarvest = require('task.harvest'),
+    doUpgrade = require('task.upgrade'),
+    doCharge = require('task.charge'),
+    doBuild = require('task.build'),
+    doRepair = require('task.repair');
 
 /* new Serf(creep)
  *
@@ -106,6 +107,9 @@ Serf.prototype.work = function () {
             break;
         case "builder":
             ret = doBuild(this.creep);
+            break;
+        case "handyman":
+            ret = doRepair(this.creep);
     }
 
     if (ret == 1) {
