@@ -11,11 +11,11 @@ module.exports = function(creep) {
     if (e == ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.room.controller);
     }
-    else if(e == ERR_NOT_ENOUGH_RESOURCES) {
+    else if (e == ERR_NOT_ENOUGH_RESOURCES) {
         creep.memory.mode = "harvest";
         return 1;
     }
-    else {
+    else if (e != OK) {
         console.log(creep.name + " upgrade error " + e);
     }
 
