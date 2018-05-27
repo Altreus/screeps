@@ -18,8 +18,9 @@ module.exports.loop = function() {
     cleanupDeadCreeps();
 
     for (let type of config.spawnPriority) {
+        if (spawn.spawning) { break }
 
-        let count = config.targetCounts[type]();
+        let count = config.targetCounts[type](spawn);
         //console.log("Need " + count + " of " + type);
         {
             let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == type);
