@@ -12,7 +12,8 @@ module.exports = function(creep, target, opts) {
     var path = PathFinder.search(creep.pos, target);
     var moveSpeed = moveSpeed(creep);
 
-    var journeyTime = path.length * moveSpeed;
+    // Can it get there *and back*?
+    var journeyTime = path.length * 2 * moveSpeed;
 
     if (creep.ticksToLive < journeyTime) {
         creep.mode = "retire";
