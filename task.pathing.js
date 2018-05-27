@@ -9,7 +9,11 @@ module.exports = function(creep, target, opts) {
     return creep.moveTo(target)
 
     // TODO Cache path in some clever way
-    var path = PathFinder.search(creep.pos, target);
+    // TODO Not all targets have to be found at range 1
+    var path = PathFinder.search({
+        pos: creep.pos,
+        range: 1, target
+    });
     var moveSpeed = moveSpeed(creep);
 
     // Can it get there *and back*?
