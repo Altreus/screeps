@@ -11,7 +11,7 @@ module.exports = function(creep) {
     if(targets.length) {
         var e = creep.build(targets[0]);
         if(e == ERR_NOT_IN_RANGE) {
-            creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            creep.moveTo(targets[0]);
         }
         else if (e == ERR_NOT_ENOUGH_RESOURCES) {
             creep.memory.mode = "harvest";
