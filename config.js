@@ -1,5 +1,4 @@
 function howManyBuilders(spawn) {
-    return 2;
     var constructions = spawn.room.find(FIND_CONSTRUCTION_SITES);
 
     var sum = (acc, c) => acc + parseInt(c.progressTotal, "10");
