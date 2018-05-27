@@ -8,20 +8,21 @@ module.exports = function(proto, spawn, name) {
 
     var memory = proto.memory || {};
     var defaults = spawn.memory.defaults || {};
+    defaults = defaults[role] || {};
 
     memory = Object.assign(defaults, memory);
 
     memory.role = role;
     memory.mode = "harvest";
 
-    var c = spawn.spawnCreep(parts, name);
+    var c = spawn.spawnCreep(parts, name, {dryRun: true});
 
     if (c == OK) {
-        let creep = Game.creeps[name];
-        creep.memory = memory;
-        return creep;
+        var c = spawn.spawnCreep(parts, name, {memory: memory});
+        return Game.creeps[name];
     }
     else {
+        //console.log(c);
         return c;
     }
 };
