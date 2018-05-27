@@ -29,7 +29,8 @@ module.exports = function(creep, opts) {
         creep.moveTo(target, moveOpts);
     }
     else if (e) {
-        console.log(creep.name + " Harvest error: " + e);
+        if (e !== ERR_BUSY)
+            console.log(creep.name + " Harvest error: " + e);
     }
     else {
         if (creep.carry.energy == creep.carryCapacity) {
