@@ -126,15 +126,22 @@ Serf.prototype.work = function () {
         ret = this.tick();
     }
     if (ret == 2) {
-        // Nothing to do! Build instead, or upgrade if not that
-        ret = doBuild(this.creep);
-
+        // Nothing to do! Builders should repair, and others should upgrade.
         if (ret == 2) {
-            ret = doUpgrade(this.creep);
+            if (this.creep.role == 'builder') {
+                ret = doRepair(this.creep);
+            }
+            else {
+                ret = doUpgrade(this.creep);
+            }
         }
 
         if (ret == 2) {
-            // figure out how to idle
+            ret = doCharge(this.creep);
+        }
+
+        if (ret == 2) {
+            doUpgrade(this.creep);
         }
     }
 
