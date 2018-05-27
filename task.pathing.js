@@ -9,6 +9,7 @@ module.exports = function(creep, target, opts) {
     return creep.moveTo(target)
 
     // TODO Cache path in some clever way
+    // TODO I might want to tell it the entire journey
     // TODO Not all targets have to be found at range 1
     var path = PathFinder.search({
         pos: creep.pos,
