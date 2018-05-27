@@ -24,24 +24,17 @@ module.exports.loop = function() {
         {
             let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == type);
             //console.log("Have " + creeps.length);
-        }
-    }
+            if (creeps.length < count) {
+                console.log("spawning " + type);
+                let c = jobs.serf.spawn(spawn, type);
+                if (Number.isInteger(c)) {
+                    console.log(c);
+                }
 
-    {
-        let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
-
-        if (creeps.length < 1) {
-            console.log("spawning upgrader");
-            let c = jobs.serf.spawn(spawn, "upgrader");
-        }
-    }
-
-    {
-        let creeps = _.filter(Game.creeps, (creep) => creep.memory.role == 'charger');
-
-        if (creeps.length < 2) {
-            console.log("spawning charger");
-            let c = jobs.serf.spawn(spawn, "charger");
+                // In all cases we should stop trying to spawn another thing
+                // this tick.
+                break;
+            }
         }
     }
 
