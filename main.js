@@ -10,11 +10,10 @@ function cleanupDeadCreeps() {
     }
 }
 
-// TODO: deal with multiple spawns
-var spawn = Game.spawns.SerfsUp;
-spawn.memory.serfs = spawn.memory.serfs || {};
-
 module.exports.loop = function() {
+    // TODO: deal with multiple spawns
+    var spawn = Game.spawns.SerfsUp;
+    spawn.memory.serfs = spawn.memory.serfs || {};
     cleanupDeadCreeps();
 
     for (let type of config.spawnPriority) {
